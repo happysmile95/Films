@@ -1,0 +1,48 @@
+﻿@using FilmsCatalog.Models;
+@model FilmViewModel
+
+@{
+    ViewData["Title"] = "AddFilmView";
+}
+
+<style>
+    input.edit-input {
+        width: 400px;
+    }
+</style>
+<form id="form1" method="post" action="save"
+      enctype="multipart/form-data">
+    <div>
+        <input class="edit-input" name="filmId" value="@Model.FilmId" hidden />
+    </div>
+    <div>
+        <label for="name"><b>Name:</b></label>
+        <input class="edit-input" name="name" value="@Model.Name" type="text" />
+    </div>
+    <div>
+        <label for="description"><b>Description:</b></label>
+        <input class="edit-input" name="description" value="@Model.Description" type="text" />
+    </div>
+    <div>
+        <label for="producer"><b>Producer:</b></label>
+        <input class="edit-input" name="producer" value="@Model.Producer" type="text" />
+    </div>
+    <div>
+        <label for="year"><b>Year:</b></label>
+        <input class="edit-input" name="year" value="@Model.Year" type="text" />
+    </div>
+    <div>
+        <label for="userName"><b>UserName:</b></label>
+        <input class="edit-input" name="userName" value="@Model.UserName" disabled />
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <p>Upload file</p>
+            <input class="form-control" name="files" type="file" />
+        </div>
+    </div>
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+</form>
+

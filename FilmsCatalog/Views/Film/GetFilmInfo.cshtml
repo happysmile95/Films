@@ -1,0 +1,43 @@
+﻿@using FilmsCatalog.Models
+@model FilmViewModel
+@{
+    ViewData["Title"] = "GetFilmInfo";
+}
+<style>
+    input.edit-input {
+        width: 400px;
+    }
+</style>
+<form id="form1" method="post" action="editFilm"
+      enctype="application/x-www-form-urlencoded">
+    <div>
+        <input class="edit-input" name="filmId" value="@Model.FilmId" hidden />
+    </div>
+    <div>
+        <label for="name"><b>Name:</b></label>
+        <input class="edit-input" name="name" value="@Model.Name" type="text" disabled />
+    </div>
+    <div>
+        <label for="description"><b>Description:</b></label>
+        <input class="edit-input" name="description" value="@Model.Description" type="text" disabled />
+    </div>
+    <div>
+        <label for="producer"><b>Producer:</b></label>
+        <input class="edit-input" name="producer" value="@Model.Producer" type="text" disabled />
+    </div>
+    <div>
+        <label for="year"><b>Year:</b></label>
+        <input name="year" value="@Model.Year" type="text" disabled />
+    </div>
+    <div>
+        <label for="userName"><b>UserName:</b></label>
+        <input class="edit-input" name="userName" value="@Model.UserName" disabled />
+    </div>
+    <div>
+        <label for="image"><b>Image:</b></label>
+        <img height="500" width="500" src="data:image;base64,@System.Convert.ToBase64String(Model.Image)" data="@Model.Image" />
+    </div>
+    <button class="btn-info" name="action" value="edit" @(Model.Disabled ? "disabled" : "")>Edit</button>
+    <button class="btn-info" name="action" value="add">Add</button>
+</form>
+

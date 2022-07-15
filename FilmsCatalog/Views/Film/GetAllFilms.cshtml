@@ -1,0 +1,68 @@
+﻿@using FilmsCatalog.Models
+@model FilmsPageViewModel
+
+@{
+    ViewData["Title"] = "GetAllFilms";
+}
+<style>
+    @@font-face {
+        font-family: 'FontAwesome';
+        src: url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2') format('woff2'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff') format('woff'), url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal
+    }
+
+    .glyphicon {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale
+    }
+
+    .glyphicon-chevron-right:before {
+        content: "\f054";
+    }
+
+    .glyphicon-chevron-left:before {
+        content: "\f053";
+    }
+</style>
+@if (Model.Enabled)
+{
+    <div>
+        <table class="table">
+            <tr><td>Name</td><td>Description</td><td>Producer</td><td>Year</td><td>UserName</td></tr>
+            @foreach (var item in Model.Films)
+            {
+                <tr onclick="location.href = '@(Url.Action("GetFilmInfo", "Film", new { filmId = item.FilmId }))'"><td>@item.Name</td><td>@item.Description</td><td>@item.Producer</td><td>@item.Year</td><td>@item.UserName</td></tr>
+            }
+        </table>
+        @if (Model.PageViewModel.HasPreviousPage)
+        {
+            <a asp-action="GetAllFilms"
+               asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+               class="btn btn-outline-dark">
+                <i class="glyphicon glyphicon-chevron-left"></i>
+                Назад
+            </a>
+        }
+        @if (Model.PageViewModel.HasNextPage)
+        {
+            <a asp-action="GetAllFilms"
+               asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+               class="btn btn-outline-dark">
+                Вперед
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a>
+        }
+        <form method="post" action="addFilm">
+            <input class="btn btn-outline-dark" type="submit" value="Add" />
+        </form>
+    </div>
+}
+@if (!Model.Enabled) 
+{
+    <h3>Для просмотра информации по фильмам необходимо авторизироваться</h3>
+}
